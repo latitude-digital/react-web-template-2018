@@ -1,0 +1,31 @@
+@import '../mixins/media';
+
+@mixin retainer($minWidth: 40%, $maxWidth: 100%){
+  lost-center: $minWidth;
+  @content;
+
+  @include desktop{
+    lost-center: $minWidth;
+  }
+
+  @include laptop{
+    lost-center: calc(#{$minWidth} * 1.2);
+  }
+
+  @include tablet-landscape{
+    lost-center: calc(#{$minWidth} * 1.3);
+  }
+
+  @include tablet-portrait{
+    lost-center: calc(#{$minWidth} * 1.4);
+  }
+
+  @include phone-landscape{
+    lost-center: calc(#{$maxWidth} / 1.1);
+  }
+
+  @include phone-portrait {
+    lost-center: $maxWidth;
+  }
+
+}

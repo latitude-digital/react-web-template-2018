@@ -1,0 +1,9 @@
+@import 'variables/index';
+@import 'mixins/index';
+@import 'components/index';
+
+@import 'reset';
+
+#root{
+  padding: $pad-md;
+}
