@@ -1,0 +1,31 @@
+@import '~assets/scss/variables/_color';
+
+.container {
+
+  width: 100%;
+  height: 75px;
+  lost-center: 100% flex;
+  lost-align: middle-right;
+  border-bottom: 2px solid black;
+
+  .nav_link_container {
+    padding: 10px;
+  }
+
+  .nav_link {
+    color: $grey;
+  }
+
+  .nav_link_active {
+    color: $blue;
+    font-weight: 600;
+  }
+
+  .nav_link_separator{
+    &::after {
+      font-weight: 600;
+      content: ' / ';
+    }
+  }
+
+}

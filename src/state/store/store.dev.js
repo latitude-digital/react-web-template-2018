@@ -5,23 +5,23 @@ import reducers from '../reducers';
 import DevTools from 'components/DevTools';
 
 const enhancer = compose(
-  applyMiddleware(apiMiddleware),
-  DevTools.instrument()
+    applyMiddleware(apiMiddleware),
+    DevTools.instrument()
 );
 
 export default function configureStore(initialState) {
 
-  const store = createStore(
-    reducers,
-    initialState,
-    enhancer
-  );
+    const store = createStore(
+        reducers,
+        initialState,
+        enhancer
+    );
 
-  if (module.hot) {
-    module.hot.accept('../reducers', () => {
-      store.replaceReducer(reducers)
-    });
-  }
+    if (module.hot) {
+        module.hot.accept('../reducers', () => {
+            store.replaceReducer(reducers)
+        });
+    }
 
-  return store;
+    return store;
 }

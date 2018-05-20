@@ -5,23 +5,23 @@ import Routes from './routes';
 import { BreadcrumbsItem } from 'react-breadcrumbs-dynamic'
 
 class Main extends Component{
-  constructor(props){
-    super(props);
-  }
+    constructor(props){
+        super(props);
+    }
 
-  render(){
-    return (
-      <main className={style.container}>
+    render(){
+        return (
+            <main className={style.container}>
 
-        <BreadcrumbsItem to='/'>
-          Main
-        </BreadcrumbsItem>
+                <BreadcrumbsItem to='/'>
+                    Main
+                </BreadcrumbsItem>
 
-        { Routes }
+                { Routes }
 
-      </main>
-    )
-  }
+            </main>
+        )
+    }
 }
 
 export default Main;

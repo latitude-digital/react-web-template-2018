@@ -13,31 +13,31 @@ app.use(morgan('dev'));
 app.use(compression());
 app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(serveStatic(config.PATH.public, {
-  lastModified: true,
-  etag: false,
-  maxAge: '1d',
-  redirect: false,
-  setHeaders: setCustomCacheControl,
+    lastModified: true,
+    etag: false,
+    maxAge: '1d',
+    redirect: false,
+    setHeaders: setCustomCacheControl,
 }));
 
 app.use((req, res, next) =>{
-  const err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+    const err = new Error('Not Found');
+    err.status = 404;
+    next(err);
 });
 
 app.use((err, req, res) =>{
-  res.status(err.status || 500);
-  res.send({
-    message: err.message,
-    error: err,
-  });
+    res.status(err.status || 500);
+    res.send({
+        message: err.message,
+        error: err,
+    });
 });
 
 function setCustomCacheControl (res, path) {
-  if (serveStatic.mime.lookup(path) === 'text/html') {
-    res.setHeader('Cache-Control', 'public, max-age=0')
-  }
+    if (serveStatic.mime.lookup(path) === 'text/html') {
+        res.setHeader('Cache-Control', 'public, max-age=0')
+    }
 }
 
 module.exports = app;

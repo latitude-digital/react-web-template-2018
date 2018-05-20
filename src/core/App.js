@@ -3,37 +3,45 @@ import { Link } from 'react-router-dom'
 import Main from './Main/Main'
 import {Breadcrumbs} from 'react-breadcrumbs-dynamic'
 import GlobalError from 'components/GlobalError'
+import Navigation from './Navigation/Navigation'
 
 function NavLink(props){
-  return (
-    <Link to={props.to}>
-      {props.children}
-    </Link>
-  )
+    return (
+        <Link to={props.to}>
+            {props.children}
+        </Link>
+    )
 }
 
 function App(){
-  return (
-    <Fragment>
+    return (
+        <Fragment>
 
-      <Breadcrumbs
-        separator={<b> / </b>}
-        item={NavLink}
-        finalItem={'span'}
-        finalProps={{
-          style: {
-            color: '#0E7EA0',
-            cursor: 'default',
-          },
-        }}
-      />
+            <Navigation />
 
-      <Main />
+            <br />
 
-      <GlobalError />
+            <div id="app">
+                <Breadcrumbs
+                    separator={<b> / </b>}
+                    item={NavLink}
+                    finalItem={'span'}
+                    finalProps={{
+                        style: {
+                            color: '#0E7EA0',
+                            cursor: 'default',
+                        },
+                    }}
+                />
 
-    </Fragment>
-  )
+                <Main />
+
+            </div>
+
+            <GlobalError />
+
+        </Fragment>
+    )
 }
 
 export default App

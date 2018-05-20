@@ -1,32 +1,32 @@
 import React from 'react'
 
 import {
-  Switch,
-  Route,
+    Switch,
+    Route,
 } from 'react-router-dom'
 
 import {
-  Home,
-  Testing,
-  NotFound,
+    Home,
+    Testing,
+    NotFound,
 } from './lazy_routes'
 
 export default (
-  <Switch>
+    <Switch>
 
-    <Route
-      exact
-      path="/"
-      component={Home}
-    />
+        <Route
+            exact
+            path="/"
+            component={Home}
+        />
 
-    <Route
-      exact
-      path="/testing"
-      component={Testing}
-    />
+        <Route
+            exact
+            path="/testing"
+            component={Testing}
+        />
 
-    <Route component={NotFound}/>
+        <Route component={NotFound}/>
 
-  </Switch>
+    </Switch>
 );

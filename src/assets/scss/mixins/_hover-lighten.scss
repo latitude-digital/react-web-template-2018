@@ -1,0 +1,21 @@
+@import 'transition';
+
+@mixin hover-lighten($color){
+  .hover_lighten{
+    @include transition-bezier(opacity 0.1s);
+    opacity: 0;
+    background: $color;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    //z-index: -1;
+  }
+
+  &:hover{
+    .hover_lighten{
+      opacity: 1;
+    }
+  }
+}

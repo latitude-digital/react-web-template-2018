@@ -1,0 +1,38 @@
+@import '../variables/_color';
+
+.bg-blue{
+  background: $blue;
+  color: white;
+
+  &.light{
+    background: lighten($blue, 10%);
+  }
+  &.dark{
+    background: darken($blue, 5%);
+  }
+}
+
+.bg-green{
+  background: $green-dark;
+  color: white;
+
+  &.light{
+    background: lighten($green-dark, 10%);
+  }
+  &.dark{
+    background: darken($green-dark, 5%);
+  }
+}
+
+.bg-gold{
+  background: $gold;
+  color: white;
+
+  &.light{
+    background: lighten($gold, 10%);
+  }
+  &.dark{
+    background: darken($gold, 5%);
+  }
+}
+

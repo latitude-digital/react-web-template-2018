@@ -3,24 +3,24 @@ import React from 'react'
 import connect from 'utils/route_connect'
 
 import {
-  setError,
+    setError,
 } from 'state/actions'
 
 function Testing(props){
-  return (
-    <div className={style.container}>
-      <h3>Testing Page</h3>
+    return (
+        <div className={style.container}>
+            <h3>Testing Page</h3>
 
-      <button onClick={() => props.setError('Uh Oh... something happened.')}>
+            <button onClick={() => props.setError('Uh Oh... something happened.')}>
         Make It Error
-      </button>
-    </div>
-  )
+            </button>
+        </div>
+    )
 }
 
 export default connect(
-  null,
-  {
-    setError,
-  }
+    null,
+    {
+        setError,
+    }
 )(Testing)

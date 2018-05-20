@@ -1,0 +1,62 @@
+@import '~assets/scss/mixins/_general';
+@import '~assets/scss/mixins/_shadow';
+@import '~assets/scss/mixins/_transition';
+@import '~assets/scss/mixins/_active-darken';
+@import '~assets/scss/mixins/_hover-lighten';
+
+$_radius: 2px;
+
+$button-height: 40px;
+$button-min-width: 80px;
+
+.container {
+
+  .basic_button{
+
+    //lost-align: middle-center;
+
+    @include box-shadow;
+    @include transition-bezier(box-shadow 0.2s);
+    @include active-darken(rgba(0, 0, 0, 0.12));
+    @include hover-lighten(rgba(255, 255, 255, 0.09));
+
+    @include resetMP;
+    border: none;
+    border-radius: $_radius;
+    //outline: none;
+    cursor: pointer;
+
+    font-size: 1.1rem;
+    font-weight: 400;
+    font-family: inherit;
+    text-align: center;
+
+    padding-left: 10px;
+    padding-right: 10px;
+
+    position: relative;
+    min-width: $button-min-width;
+    height: $button-height;
+    line-height: $button-height - 7px;
+
+    //z-index: 1;
+
+    .text{
+      z-index: 10;
+    }
+
+    .icon {
+      display: inline-block;
+      cursor: pointer;
+      height: $button-height / 1.5;
+      width: $button-height / 1.5;
+      margin: $button-height / 6;
+    }
+
+    &:focus{
+      //outline: inset thick;
+    }
+
+  }
+}
+

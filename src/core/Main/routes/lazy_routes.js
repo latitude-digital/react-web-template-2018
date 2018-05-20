@@ -1,38 +1,41 @@
 import React, { Fragment } from 'react'
 import { BreadcrumbsItem } from 'react-breadcrumbs-dynamic'
-import Bundle from '../../../utils/Bundle'
 
-import loadHome from 'bundle-loader?lazy&name=[name]!pages/Home'
-import loadNotFound from 'bundle-loader?lazy&name=[name]!pages/NotFound'
-import loadTesting from 'bundle-loader?lazy&name=[name]!pages/Testing'
+import loadComponent from 'utils/loadComponent'
+
+export const Home = loadComponent({
+    loader: () => import('pages/Home'),
+    render(loaded, props) {
+        return withCrumb(loaded.default, props, '/home', 'Home')
+    },
+});
+
+export const Testing = loadComponent({
+    timeout: 2000,
+    loader: () => {
+        return new Promise((resolve) => {
+            setTimeout(() =>{
+                resolve(import('pages/Testing'));
+            }, 4000)
+        })
+    },
+    render(loaded, props) {
+        return withCrumb(loaded.default, props, '/testing', 'Testing')
+    },
+});
 
 
-export const Home = (props) => (
-  <Bundle load={loadHome}>
-    {(Home) => withCrumb(Home, props, '/home', 'Home')}
-  </Bundle>
-);
-
-export const Testing = (props) => (
-  <Bundle load={loadTesting}>
-    {(Testing) => withCrumb(Testing, props, '/testing', 'Testing')}
-  </Bundle>
-);
-
-export const NotFound = (props) => (
-  <Bundle load={loadNotFound}>
-    {(NotFound) => withCrumb(NotFound, props, '/not-found', 'Not Found')}
-  </Bundle>
-);
-
+export const NotFound = loadComponent({
+    loader: () => import('pages/NotFound'),
+});
 
 function withCrumb(Component, props, to, title){
-  return (
-    <Fragment>
-      <BreadcrumbsItem to={to}>
-        {title}
-      </BreadcrumbsItem>
-      <Component {...props}/>
-    </Fragment>
-  )
+    return (
+        <Fragment>
+            <BreadcrumbsItem to={to}>
+                {title}
+            </BreadcrumbsItem>
+            <Component {...props}/>
+        </Fragment>
+    )
 }

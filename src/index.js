@@ -10,22 +10,22 @@ const store = configureStore();
 const rootElement = document.getElementById('root');
 
 if (module.hot) {
-  module.hot.accept('core/Root', () => {
-    setTimeout(render, 0);
-  });
+    module.hot.accept('core/Root', () => {
+        setTimeout(render, 0);
+    });
 }
 
 render();
 registerServiceWorker();
 
 function render(){
-  const Root = require('core/Root').default;
-  ReactDOM.render(
-    <ThroughProvider>
-      <Provider store={store}>
-        <Root />
-      </Provider>
-    </ThroughProvider>,
-    rootElement
-  );
+    const Root = require('core/Root').default;
+    ReactDOM.render(
+        <ThroughProvider>
+            <Provider store={store}>
+                <Root />
+            </Provider>
+        </ThroughProvider>,
+        rootElement
+    );
 }
