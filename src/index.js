@@ -17,7 +17,7 @@ if (module.hot) {
 }
 
 render();
-registerServiceWorker();
+// registerServiceWorker();
 
 function render(){
     const Root = require('core/Root').default;
@@ -50,9 +50,7 @@ if(process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging') 
     versionCheckInterval = setInterval(() => {
         checkAppVersion(APP_VERSION)
             .catch((reload) => {
-                if(reload){
-                    refreshPage();
-                }
+                reload && refreshPage();
             })
     }, 10000);
 

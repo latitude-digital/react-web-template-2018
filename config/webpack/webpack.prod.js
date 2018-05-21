@@ -124,31 +124,31 @@ module.exports = {
         new ScriptExtHtmlWebpackPlugin({
             defaultAttribute: 'defer',
         }),
-        new SWPrecacheWebpackPlugin({
-            // By default, a cache-busting query parameter is appended to requests
-            // used to populate the caches, to ensure the responses are fresh.
-            // If a URL is already hashed by Webpack, then there is no concern
-            // about it being stale, and the cache-busting can be skipped.
-            // dontCacheBustUrlsMatching: /\.\w{10}\./,
-            filename: 'service-worker.js',
-            logger(message) {
-                if (message.indexOf('Total precache size is') === 0) {
-                    // This message occurs for every build and is a bit too noisy.
-                    return;
-                }
-                if (message.indexOf('Skipping static resource') === 0) {
-                    // This message obscures real errors so we ignore it.
-                    // https://github.com/facebookincubator/create-react-app/issues/2612
-                    return;
-                }
-                console.log(message);
-            },
-            minify: true,
-            directoryIndex: 'index.html',
-            navigateFallback: '/index.html',
-            navigateFallbackWhitelist: [/^(?!\/__).*/],
-            staticFileGlobsIgnorePatterns: [/\.map$/, /\.html$/],
-        }),
+        // new SWPrecacheWebpackPlugin({
+        //     // By default, a cache-busting query parameter is appended to requests
+        //     // used to populate the caches, to ensure the responses are fresh.
+        //     // If a URL is already hashed by Webpack, then there is no concern
+        //     // about it being stale, and the cache-busting can be skipped.
+        //     // dontCacheBustUrlsMatching: /\.\w{10}\./,
+        //     filename: 'service-worker.js',
+        //     logger(message) {
+        //         if (message.indexOf('Total precache size is') === 0) {
+        //             // This message occurs for every build and is a bit too noisy.
+        //             return;
+        //         }
+        //         if (message.indexOf('Skipping static resource') === 0) {
+        //             // This message obscures real errors so we ignore it.
+        //             // https://github.com/facebookincubator/create-react-app/issues/2612
+        //             return;
+        //         }
+        //         console.log(message);
+        //     },
+        //     minify: true,
+        //     directoryIndex: 'index.html',
+        //     navigateFallback: '/index.html',
+        //     navigateFallbackWhitelist: [/^(?!\/__).*/],
+        //     staticFileGlobsIgnorePatterns: [/\.map$/, /\.html$/],
+        // }),
         new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
         new webpack.optimize.UglifyJsPlugin({
             sourceMap: true,

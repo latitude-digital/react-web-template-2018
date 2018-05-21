@@ -1,15 +1,19 @@
 
-import axios from 'axios'
-
 export default function checkAppVersion(version){
-    return axios.get(`/version?number=${version}`)
+    return fetch(`/version?number=${version}`)
         .then((response) => {
-            console.log(response.data.message);
+            if(response.ok){
+                return response.json();
+            }
+            return response.json().then(data => {
+                return Promise.reject(data)
+            })
         })
-        .catch((error) => {
-            console.log(error);
-            if(!error.response) return Promise.reject(false);
-            if(!error.response.data) return Promise.reject(false);
-            return Promise.reject(error.response.data.reload);
+        .then(data => {
+            console.log(data.message);
+        })
+        .catch((data) => {
+            console.dir(data.message);
+            return Promise.reject(data.reload);
         })
 }
