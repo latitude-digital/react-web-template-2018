@@ -12,7 +12,7 @@ function Testing(props){
             <h3>Testing Page</h3>
 
             <button onClick={() => props.setError('Uh Oh... something happened.')}>
-        Make It Error
+                Make It Error
             </button>
         </div>
     )

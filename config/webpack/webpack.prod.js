@@ -11,13 +11,14 @@ const InlineChunkManifestHtmlWebpackPlugin = require('inline-chunk-manifest-html
 const ManifestPlugin = require('webpack-manifest-plugin');
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
 const NameAllModulesPlugin = require('name-all-modules-plugin');
-const StyleExtHtmlWebpackPlugin = require('style-ext-html-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
+const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
+const CompressionPlugin = require('compression-webpack-plugin');
 const WebpackMd5Hash = require('webpack-md5-hash');
 
-const appStyle = new ExtractTextPlugin('[name].[contenthash:10].css');
-const vendorStyle = new ExtractTextPlugin('vendor.[contenthash:10].css');
+const appStyle = new ExtractTextPlugin('app.[contenthash].css');
+const vendorStyle = new ExtractTextPlugin('vendor.[contenthash].css');
 
 module.exports = {
     bail: true,
@@ -29,15 +30,15 @@ module.exports = {
         ],
     },
     entry: {
-        app: [
+        [`app-${config.APP_VERSION}`]: [
             require.resolve('../polyfills'),
             srcPathJoin('index'),
         ],
     },
     output: {
         path: config.PATH.public,
-        filename: '[name].[chunkhash:10].js',
-        chunkFilename: '[name].[chunkhash:10].js',
+        filename: `[name].[chunkhash].js`,
+        chunkFilename: `[name].[chunkhash].js`,
         devtoolModuleFilenameTemplate: info =>
             path
                 .relative(config.PATH.src, info.absoluteResourcePath)
@@ -120,6 +121,9 @@ module.exports = {
         new webpack.LoaderOptionsPlugin({
             minimize: true,
         }),
+        new ScriptExtHtmlWebpackPlugin({
+            defaultAttribute: 'defer',
+        }),
         new SWPrecacheWebpackPlugin({
             // By default, a cache-busting query parameter is appended to requests
             // used to populate the caches, to ensure the responses are fresh.
@@ -153,15 +157,15 @@ module.exports = {
             compress: {
                 drop_console: config.__PRODUCTION__,
                 warnings: false,
-                // screw_ie8: true,
-                // conditionals: true,
-                // unused: true,
-                // comparisons: true,
-                // sequences: true,
-                // dead_code: true,
-                // evaluate: true,
-                // if_return: true,
-                // join_vars: true,
+                screw_ie8: true,
+                conditionals: true,
+                unused: true,
+                comparisons: true,
+                sequences: true,
+                dead_code: true,
+                evaluate: true,
+                if_return: true,
+                join_vars: true,
             },
             mangle: {
                 except: ['webpackJsonp'],
@@ -170,6 +174,13 @@ module.exports = {
             },
         }),
         new webpack.HashedModuleIdsPlugin(),
+        new CompressionPlugin({
+            asset: '[path].gz[query]',
+            algorithm: 'gzip',
+            test: /\.js$|\.css$|\.html$|\.eot?.+$|\.ttf?.+$|\.woff?.+$|\.svg?.+$/,
+            threshold: 10240,
+            minRatio: 0.8,
+        }),
         new BundleAnalyzerPlugin({
             analyzerMode: 'static',
             reportFilename: 'build_report.html',

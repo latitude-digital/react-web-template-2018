@@ -1,16 +1,20 @@
 import React, { Fragment } from 'react'
 import { BreadcrumbsItem } from 'react-breadcrumbs-dynamic'
 
-import loadComponent from 'utils/loadComponent'
+import Loadable from 'react-loadable';
+import Loading from 'components/Loading'
 
-export const Home = loadComponent({
+export const Home = Loadable({
+    loading: Loading,
+    timeout: 10000,
     loader: () => import('pages/Home'),
     render(loaded, props) {
         return withCrumb(loaded.default, props, '/home', 'Home')
     },
 });
 
-export const Testing = loadComponent({
+export const Testing = Loadable({
+    loading: Loading,
     timeout: 2000,
     loader: () => {
         return new Promise((resolve) => {
@@ -25,7 +29,9 @@ export const Testing = loadComponent({
 });
 
 
-export const NotFound = loadComponent({
+export const NotFound = Loadable({
+    loading: Loading,
+    timeout: 10000,
     loader: () => import('pages/NotFound'),
 });
 

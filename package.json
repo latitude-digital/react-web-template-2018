@@ -1,6 +1,6 @@
 {
   "name": "react-web-template-2018",
-  "version": "1.0.0",
+  "version": "1.0.6",
   "license": "MIT",
   "main": "./bin/www",
   "scripts": {
@@ -27,6 +27,7 @@
     "babel-preset-stage-0": "^6.24.1",
     "bundle-loader": "^0.5.5",
     "compression": "^1.7.0",
+    "compression-webpack-plugin": "^1.1.11",
     "cors": "^2.8.4",
     "css-loader": "0.23.1",
     "debug": "^3.0.1",

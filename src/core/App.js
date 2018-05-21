@@ -4,6 +4,7 @@ import Main from './Main/Main'
 import {Breadcrumbs} from 'react-breadcrumbs-dynamic'
 import GlobalError from 'components/GlobalError'
 import Navigation from './Navigation/Navigation'
+import Footer from './Footer/Footer'
 
 function NavLink(props){
     return (
@@ -22,6 +23,7 @@ function App(){
             <br />
 
             <div id="app">
+
                 <Breadcrumbs
                     separator={<b> / </b>}
                     item={NavLink}
@@ -37,6 +39,8 @@ function App(){
                 <Main />
 
             </div>
+
+            <Footer />
 
             <GlobalError />
 

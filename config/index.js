@@ -1,7 +1,9 @@
 const fs = require('fs');
 const path = require('path');
+const pkg = require('../package.json');
 
-const APP_NAME = 'React Template 2018';
+const APP_NAME = 'Deployment Test';
+const APP_VERSION = pkg.version;
 const PORT = '9001';
 
 const {
@@ -33,6 +35,7 @@ process.env.NODE_PATH = (process.env.NODE_PATH || '')
 
 const config = {
     APP_NAME,
+    APP_VERSION,
     ENV,
     PORT,
     PATH,

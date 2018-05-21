@@ -7,3 +7,8 @@
 #app{
   padding: $pad-md;
 }
+
+#root {
+  min-height: 100%;
+  position: relative;
+}

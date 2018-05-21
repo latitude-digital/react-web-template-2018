@@ -13,6 +13,7 @@ module.exports = {
     },
     "globals": {
         "__DEV__": false,
+        "APP_VERSION": true,
         "Promise": true,
     },
     "plugins": [

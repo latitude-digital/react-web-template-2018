@@ -5,6 +5,7 @@ const morgan = require('morgan');
 const cors = require('cors');
 const compression = require('compression');
 const config = require('./config');
+const pkg = require('./package.json');
 
 const app = express();
 
@@ -19,6 +20,33 @@ app.use(serveStatic(config.PATH.public, {
     redirect: false,
     setHeaders: setCustomCacheControl,
 }));
+
+app.get('/version', (req, res) => {
+
+    const {
+        number,
+    } = req.query;
+
+    if(!number) {
+        return res.status(400).send({
+            message: 'Missing required "number" query param',
+        })
+    }
+
+    const appVersion = number.toString();
+
+    if(appVersion !== pkg.version){
+        return res.status(400).send({
+            reload: true,
+            message: 'Package version out of date.',
+        })
+    }
+
+    res.status(200).send({
+        message: 'Package version up to date.',
+    })
+
+});
 
 app.use((req, res, next) =>{
     const err = new Error('Not Found');

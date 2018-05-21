@@ -47,6 +47,7 @@ const webpackDefaults = {
         ],
     },
     plugins: [
+        // new webpack.optimize.ModuleConcatenationPlugin(),
         new webpack.NamedChunksPlugin(),
         new ReactLoadablePlugin({
             filename: './public/react-loadable.json',
@@ -80,6 +81,7 @@ const webpackDefaults = {
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify(config.ENV),
             'process.env.API_DOMAIN': JSON.stringify(config.API_DOMAIN),
+            'APP_VERSION': JSON.stringify(config.APP_VERSION),
             'PUBLIC_URL': '',
         }),
     ],
@@ -111,5 +113,5 @@ function nameAsset(filePath){
 
     publicDir = file === publicDir ? '' : `${publicDir}/`;
 
-    return `${publicDir}[name].[ext]`
+    return `${publicDir}[name].[hash].[ext]`
 }
